@@ -1,19 +1,17 @@
-
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
+import Axios from "axios";
 
 export default function AddClientForm() {
-  const { register, handleSubmit } = useForm();
+  const url = "";
+  const [data, setData] = useState({
+    name: "",
+    postname: "",
+    nationalite: "",
+  });
 
-  const onSubmit = (data) => {
-    fetch(`http://localhost:3333/api/clients/create`, {
-      method: "POST",
-      body: data,
-    }).then(() => {
-        console.log("client creer avec succes!")
-        console.log(data)
-    });
-  };
-
+  function handleChange(e) {
+    const newData = {...data};
+  }
 
   return (
     <>
@@ -22,62 +20,55 @@ export default function AddClientForm() {
           Ajouter un nouveau client
         </h2>
       </div>
-      <div className="flex flex-col justify-center mx-2">
-        <div className="max-w-md w-full mx-auto mt-2 bg-white p-6">
-          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-            <div>
-              <label
-                htmlFor="name"
-                className="text-sm font-bold text-gary-600 block"
-              >
-                Nom
-              </label>
-              <input
-                id="name"
-                {...register("name")}
-                type="text"
-                className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="postname"
-                className="text-sm font-bold text-gary-600 block"
-              >
-                PostNom
-              </label>
-              <input
-                id="postname"
-                {...register("postname")}
-                type="text"
-                className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="nationalite"
-                className="text-sm font-bold text-gary-600 block"
-              >
-                Nationalite
-              </label>
-              <input
-                id="nationalite"
-                {...register("nationalite")}
-                type="text"
-                className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none"
-              />
-            </div>
-            <div>
-              <button
-                className="w-full py-2 px-4 bg-gray-900 hover:border rounded-md text-white text-sm font-Rubik"
-                type="submit"
-              >
-                Ajouter
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+      <div className="max-w-md w-full mx-auto mt-2 bg-white p-6">
+        <form className="space-y-6">
+          <div>
+            <label
+              htmlFor="name"
+              className="text-sm font-bold text-gary-600 block"
+            >
+              Nom
+            </label>
+            <input
+              onChange={(e) => handleChange(e)}
+              id-="name"
+              value={data.name}
+              placeholder="name"
+              type="text"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="postname"
+              className="text-sm font-bold text-gary-600 block"
+            >
+              Postnom
+            </label>
+            <input
+              onChange={(e) => handleChange(e)}
+              id-="postname"
+              value={data.postname}
+              placeholder="postname"
+              type="text"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="nationalite"
+              className="text-sm font-bold text-gary-600 block"
+            >
+              Nationalite
+            </label>
+            <input
+              onChange={(e) => handleChange(e)}
+              id-="nationalite"
+              value={data.nationalite}
+              placeholder="nationalite"
+              type="text"
+            />
+          </div>
+        </form>
+      </div> 
     </>
   );
 }
